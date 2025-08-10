@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveDeal - Find Your Perfect Car</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 onclick="showPage('home')" style="cursor: pointer;">DriveDeal</h1>
+        <div class="nav-links">
+            <span id="welcome-user"></span>
+            <a href="#" data-page="home">Home</a>
+            <a href="#" data-page="listings">Browse Cars</a>
+            <a href="#" data-page="favorites">Wishlist</a>
+            <a href="#" data-page="login" id="login-link">Login</a>
+            <a href="#" data-page="register" id="register-link">Register</a>
+            <button id="logout-btn" class="hidden">Logout</button>
+            <a href="#" data-page="admin" id="admin-link" class="hidden">Admin</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <div class="hero">
+                <h2>Find Your Perfect Car</h2>
+                <p>Browse thousands of listings from trusted sellers nationwide</p>
+                <div class="hero-buttons">
+                    <a href="#" data-page="register" class="btn btn-primary">Get Started</a>
+                    <a href="#" data-page="listings" class="btn btn-secondary">Browse Cars</a>
+                </div>
+            </div>
+
+            <div class="featured-section">
+                <h2>Featured Cars</h2>
+                <div id="featured-listings-container" class="listing-grid"></div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page">
+            <div class="auth-container">
+                <h2>Login to Your Account</h2>
+                <div id="login-error" class="error-message"></div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="auth-footer">Don't have an account? <a href="#" data-page="register">Register here</a></p>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div id="register-page" class="page">
+            <div class="auth-container">
+                <h2>Create an Account</h2>
+                <div id="register-error" class="error-message"></div>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <input type="text" id="register-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Phone Number (optional)</label>
+                        <input type="tel" id="register-phone">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+                <p class="auth-footer">Already have an account? <a href="#" data-page="login">Login here</a></p>
+            </div>
+        </div>
+
+        <!-- Listings Page -->
+        <div id="listings-page" class="page">
+            <div class="page-header">
+                <h2>Available Cars</h2>
+                <button id="add-listing-btn" class="btn btn-primary hidden">Add New Listing</button>
+            </div>
+
+            <div class="search-filters">
+                <input type="text" id="search-input" placeholder="Search makes/models...">
+                <select id="fuel-type-filter">
+                    <option value="">All Fuel Types</option>
+                    <option value="Gasoline">Gasoline</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                </select>
+                <button id="search-btn" class="btn btn-secondary">Search</button>
+            </div>
+
+            <div id="listings-container" class="listing-grid"></div>
+        </div>
+
+        <!-- Add/Edit Listing Page -->
+        <div id="edit-listing-page" class="page">
+            <h2 id="edit-listing-title">Add New Listing</h2>
+            <form id="listing-form" enctype="multipart/form-data">
+                <input type="hidden" id="listing-id">
+                <div class="form-group">
+                    <label>Make</label>
+                    <input type="text" id="make" required>
+                </div>
+                <div class="form-group">
+                    <label>Model</label>
+                    <input type="text" id="model" required>
+                </div>
+                <div class="form-group">
+                    <label>Year</label>
+                    <input type="number" id="year" min="1900" max="2099" required>
+                </div>
+                <div class="form-group">
+                    <label>Price (€)</label>
+                    <input type="number" id="price" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Mileage</label>
+                    <input type="number" id="mileage" min="0">
+                </div>
+                <div class="form-group">
+                    <label>Fuel Type</label>
+                    <select id="fuel-type">
+                        <option value="">Select</option>
+                        <option value="Gasoline">Gasoline</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Electric">Electric</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Transmission</label>
+                    <select id="transmission">
+                        <option value="">Select</option>
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Color</label>
+                    <input type="text" id="color">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" id="image" accept="image/*">
+                    <img id="image-preview" src="" style="max-width: 200px; display: none;">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" id="cancel-edit" class="btn btn-secondary">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Listing Details Page -->
+        <div id="listing-details-page" class="page">
+            <div id="listing-details-container"></div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div id="favorites-page" class="page">
+            <h2>Your Wishlist</h2>
+            <div id="favorites-container" class="listing-grid"></div>
+        </div>
+
+        <!-- Admin Page -->
+        <div id="admin-page" class="page">
+            <h2>Admin Dashboard</h2>
+            <div class="admin-grid">
+                <div class="admin-section">
+                    <h3>User Management</h3>
+                    <div id="users-container"></div>
+                </div>
+                <div class="admin-section">
+                    <h3>Listing Management</h3>
+                    <div id="admin-listings-container"></div>
+                </div>
+                <div class="admin-section">
+                    <h3>Reports</h3>
+                    <div id="admin-reports-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Modal -->
+        <div id="report-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Report User</h2>
+                <form id="report-form">
+                    <input type="hidden" id="reported-user-id">
+                    <input type="hidden" id="reported-listing-id">
+                    <div class="form-group">
+                        <label>Reason for reporting</label>
+                        <textarea id="report-reason" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 DriveDeal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
