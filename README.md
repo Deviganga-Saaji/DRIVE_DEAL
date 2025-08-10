@@ -45,3 +45,10 @@ DriveDeal is a full-stack web application for buying and selling automobiles. It
 2.	Install Dependencies: "npm install sqlite3 express" and "npm install jsonwebtoken express-validator"
 3.	Start the Server: node server.js 
 
+**NOTE:** 
+We initially implemented JWT authentication in script.js (renamed to script_jwt.js for reference). However, this caused conflicts with existing functionalities. As a result:
+-- The main application continues to use the original script.js (without JWT).
+-- The experimental JWT version is preserved as script_jwt.js for future reference.
+
+Reason for Reversion:
+-- The JWT integration disrupted core features (e.g., session management, API calls).
